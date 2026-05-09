@@ -12,7 +12,6 @@
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-
                 <div class="mt-4 relative">
                     <x-input-label for="email" :value="'Email'" />
                     <x-text-input

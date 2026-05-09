@@ -41,9 +41,9 @@
                     <p class="text-sky-100 text-xs font-semibold uppercase tracking-wider mb-1">Total Pendapatan</p>
                     <p class="text-2xl font-bold">Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</p>
                 </div>
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                {{-- <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center"> --}}
                     <i class="fa-solid fa-money-bill-wave text-xl"></i>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
 
@@ -53,9 +53,9 @@
                     <p class="text-emerald-100 text-xs font-semibold uppercase tracking-wider mb-1">Total Transaksi</p>
                     <p class="text-2xl font-bold">{{ number_format($totalTransaksi) }}</p>
                 </div>
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                {{-- <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center"> --}}
                     <i class="fa-solid fa-receipt text-xl"></i>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
 
@@ -65,9 +65,9 @@
                     <p class="text-violet-100 text-xs font-semibold uppercase tracking-wider mb-1">Rata-rata / Transaksi</p>
                     <p class="text-2xl font-bold">Rp {{ number_format($rataRata, 0, ',', '.') }}</p>
                 </div>
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                {{-- <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center"> --}}
                     <i class="fa-solid fa-chart-bar text-xl"></i>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>

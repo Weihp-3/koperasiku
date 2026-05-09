@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,7 +47,7 @@
 </head>
 <body class="bg-pattern antialiased text-slate-800 overflow-x-hidden relative min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
     <div class="blob bg-sky-300 w-96 h-96 rounded-full top-0 left-[-10%] mix-blend-multiply"></div>
-    <div class="blob bg-indigo-300 w-96 h-96 rounded-full bottom-[-10%] right-[-10%] mix-blend-multiply"></div>
+    {{-- <div class="blob bg-indigo-300 w-96 h-96 rounded-full bottom-[-10%] right-[-10%] mix-blend-multiply"></div> --}}
     <div class="blob bg-pink-200 w-80 h-80 rounded-full top-[20%] right-[10%] mix-blend-multiply delay-150"></div>
     <nav class="absolute w-full top-0 z-50 px-6 py-6 lg:px-12 flex justify-between items-center">
         <div class="flex items-center gap-3">
@@ -203,19 +203,146 @@
             </div>
         </div>
     </main>
-    <footer class="py-8 bg-white/50 backdrop-blur-md border-t border-slate-200/50 relative z-20 mt-12 lg:mt-0">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-store text-sky-500"></i>
-                <span class="font-bold text-slate-800">KoperasiKU</span>
+
+    <section id="features" class="relative z-10 bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-12">
+                <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-500">Fitur Unggulan</p>
+                <h2 class="mt-4 text-4xl lg:text-5xl font-extrabold text-slate-900">Semua kebutuhan koperasi dalam satu sistem</h2>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Solusi Point of Sale yang dirancang khusus untuk koperasi sekolah: penjualan cepat, manajemen anggota, dan laporan otomatis.</p>
             </div>
-            <p class="text-sm text-slate-500 font-medium">
-                © {{ date('Y') }} Koperasi Sekolah Cerdas. All rights reserved.
-            </p>
-            <div class="flex items-center gap-4 text-slate-400">
-                <a href="#" class="hover:text-sky-500 transition"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" class="hover:text-sky-500 transition"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#" class="hover:text-sky-500 transition"><i class="fa-brands fa-instagram"></i></a>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <div class="p-8 rounded-[2rem] border border-slate-200 bg-slate-50 shadow-sm hover:shadow-lg transition">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-cash-register text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Transaksi Cepat</h3>
+                    <p class="text-slate-600 leading-relaxed">Proses pembelian siswa cepat dengan kasir intuitif, scanner, dan pilihan metode pembayaran praktis.</p>
+                </div>
+                <div class="p-8 rounded-[2rem] border border-slate-200 bg-slate-50 shadow-sm hover:shadow-lg transition">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-boxes-packing text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Stok & Inventaris</h3>
+                    <p class="text-slate-600 leading-relaxed">Pantau inventaris barang secara real-time, pindah stok otomatis, dan terima notifikasi saat barang menipis.</p>
+                </div>
+                <div class="p-8 rounded-[2rem] border border-slate-200 bg-slate-50 shadow-sm hover:shadow-lg transition">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Laporan Realtime</h3>
+                    <p class="text-slate-600 leading-relaxed">Lihat ringkasan penjualan, saldo, dan performa koperasi kapan saja dengan dashboard laporan yang jelas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="relative z-10 bg-slate-950 text-white py-20 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_rgba(56,189,248,0.35),_transparent_25%)]"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative">
+            <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
+                <div class="space-y-6">
+                    <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-300">Tentang Sistem</p>
+                    <h2 class="text-4xl lg:text-5xl font-extrabold">Sistem koperasi sekolah yang mudah dipelajari dan dikelola.</h2>
+                    <p class="text-slate-300 max-w-xl leading-relaxed text-lg">KoperasiKU dibuat untuk membantu kepala sekolah, kasir, dan siswa mengelola penjualan, dan laporan dengan workflow sederhana, tanpa perlu pengetahuan teknis rumit.</p>
+                </div>
+
+                <div class="grid gap-6">
+                    <div class="p-8 rounded-[2rem] bg-slate-900/90 border border-white/10 shadow-[0_20px_80px_-40px_rgba(15,23,42,0.8)]">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-user-gear"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">Antarmuka Ramah Pengguna</h3>
+                                <p class="text-slate-300 text-sm">Desain sederhana untuk kasir dan admin, cocok bagi sekolah.</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 leading-relaxed">Buka fitur penting dengan cepat, gunakan sistem tanpa bingung, dan percepat proses transaksi di koperasi sekolah.</p>
+                    </div>
+                    <div class="p-8 rounded-[2rem] bg-slate-900/90 border border-white/10 shadow-[0_20px_80px_-40px_rgba(15,23,42,0.8)]">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">Data yang Tersimpan Aman</h3>
+                                <p class="text-slate-300 text-sm">Riwayat transaksi dan simpanan tercatat tepat, rapi, dan mudah dicari.</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 leading-relaxed">Gunakan sistem untuk mencatat penjualan dan saldo siswa secara otomatis, tanpa kerepotan mengelola dokumen manual.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="relative z-10 bg-gradient-to-b from-slate-100 via-white to-slate-100 py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-12">
+                <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-500">Testimoni</p>
+                <h2 class="mt-4 text-4xl lg:text-5xl font-extrabold text-slate-900">Apa kata pengguna kami</h2>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Review dari guru dan petugas koperasi yang telah menggunakan KoperasiKU untuk kegiatan harian mereka.</p>
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-3">
+                <div class="p-8 rounded-[2rem] bg-white border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-xl font-bold">S</div>
+                        <div>
+                            <p class="font-semibold text-slate-900">Siti, Kepala Koperasi</p>
+                            <p class="text-sm text-slate-500">SMA Negeri 1</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">“KoperasiKU membuat pencatatan pembelian dan simpanan menjadi sangat mudah. Guru kasir kini bisa melayani lebih cepat dengan laporan otomatis untuk setiap aktivitas.”</p>
+                </div>
+                <div class="p-8 rounded-[2rem] bg-white border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-xl font-bold">A</div>
+                        <div>
+                            <p class="font-semibold text-slate-900">Andi, Petugas Kasir</p>
+                            <p class="text-sm text-slate-500">Madrasah Aliyah</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">“Transaksi sehari-hari jadi lancar dan tidak lagi manual. Fitur stok otomatis dan laporan bulanan membantu kami mengambil keputusan cepat.”</p>
+                </div>
+                <div class="p-8 rounded-[2rem] bg-white border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl font-bold">R</div>
+                        <div>
+                            <p class="font-semibold text-slate-900">Rina, Bendahara Sekolah</p>
+                            <p class="text-sm text-slate-500">SMK Budaya</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">“Laporan keuangan koperasi kini lebih terstruktur. Data simpanan siswa mudah dicari, dan sistem ini sangat cocok untuk sekolah modern.”</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="relative z-20 bg-slate-100/90 border-t border-slate-200/70">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-sky-500 text-white flex items-center justify-center shadow-lg shadow-sky-500/20">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-900 text-lg">KoperasiKU</p>
+                        <p class="text-sm text-slate-500">Point of Sale Koperasi Sekolah</p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-500 text-center lg:text-left">
+                    © {{ date('Y') }} Koperasi Sekolah Cerdas. All rights reserved.
+                </p>
+
+                <div class="flex items-center justify-center gap-4 text-slate-500">
+                    <a href="#" class="hover:text-sky-600 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-sky-600 transition"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-sky-600 transition"><i class="fa-brands fa-instagram"></i></a>
+                </div>
             </div>
         </div>
     </footer>

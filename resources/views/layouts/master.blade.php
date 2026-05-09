@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"> --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <title>@yield('title', 'KoperasiKU')</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -115,7 +117,10 @@
                         transition-all duration-200 transform hover:translate-x-1 active:scale-95
                         hover:shadow-[0_6px_12px_rgba(27,168,240,0.4)]
                         {{ request()->routeIs('admin.topup.*') ? 'bg-sky-400 text-white shadow' : 'text-gray-600 hover:bg-gray-100' }}">
-                        <i class="fa-solid fa-money-bill-transfer w-4"></i>
+                        <svg width="20" height="20" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.4375 20.6666C17.4375 21.1805 17.2334 21.6733 16.87 22.0366C16.5067 22.4 16.0139 22.6041 15.5 22.6041C14.9861 22.6041 14.4933 22.4 14.13 22.0366C13.7666 21.6733 13.5625 21.1805 13.5625 20.6666C13.5625 20.1528 13.7666 19.66 14.13 19.2966C14.4933 18.9333 14.9861 18.7291 15.5 18.7291C16.0139 18.7291 16.5067 18.9333 16.87 19.2966C17.2334 19.66 17.4375 20.1528 17.4375 20.6666Z" fill="currentColor"/>
+                            <path d="M18.5315 0.852539L22.639 6.60821L25.3477 5.68466L27.8199 12.9167H29.0625V28.4167H1.9375V12.9167H2.59625V12.9038L3.43325 12.9115L18.5315 0.852539ZM12.1378 12.9167H25.0906L23.7512 8.99908L21.7852 9.62812L12.1378 12.9167ZM10.1254 10.872L20.0854 7.47879L18.0136 4.57254L10.1254 10.872ZM7.10417 15.5H4.52083V18.0834C5.20598 18.0834 5.86306 17.8112 6.34753 17.3267C6.83199 16.8423 7.10417 16.1852 7.10417 15.5ZM20.0208 20.6667C20.0208 20.073 19.9039 19.4852 19.6767 18.9367C19.4495 18.3882 19.1165 17.8898 18.6967 17.47C18.2769 17.0502 17.7785 16.7172 17.23 16.49C16.6816 16.2628 16.0937 16.1459 15.5 16.1459C14.9063 16.1459 14.3184 16.2628 13.77 16.49C13.2215 16.7172 12.7231 17.0502 12.3033 17.47C11.8835 17.8898 11.5505 18.3882 11.3233 18.9367C11.0961 19.4852 10.9792 20.073 10.9792 20.6667C10.9792 21.8657 11.4555 23.0156 12.3033 23.8634C13.1511 24.7112 14.301 25.1875 15.5 25.1875C16.699 25.1875 17.8489 24.7112 18.6967 23.8634C19.5445 23.0156 20.0208 21.8657 20.0208 20.6667ZM26.4792 25.8334V23.25C25.794 23.25 25.1369 23.5222 24.6525 24.0067C24.168 24.4911 23.8958 25.1482 23.8958 25.8334H26.4792ZM23.8958 15.5C23.8958 16.1852 24.168 16.8423 24.6525 17.3267C25.1369 17.8112 25.794 18.0834 26.4792 18.0834V15.5H23.8958ZM4.52083 25.8334H7.10417C7.10417 25.1482 6.83199 24.4911 6.34753 24.0067C5.86306 23.5222 5.20598 23.25 4.52083 23.25V25.8334Z" fill="currentColor"/>
+                        </svg>
                         Top Up Siswa
                     </a>
                 </div>
@@ -124,7 +129,7 @@
         </aside>
 
         <div class="flex-1 flex flex-col min-w-0">
-            <header class="bg-white h-16 border-b px-4 md:px-6 flex items-center justify-between sticky top-0">
+            <header class="bg-white h-16 border-b px-4 md:px-6 flex items-center justify-between sticky top-0 z-30">
                 <div class="flex items-center gap-3">
                     <button onclick="openSidebar()" class="md:hidden text-gray-500 hover:text-blue-500 transition text-xl">
                         <i class="fa-solid fa-bars"></i>

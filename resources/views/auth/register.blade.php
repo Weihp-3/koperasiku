@@ -66,7 +66,7 @@
 
                 <div class="mt-6">
                     <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-900 text-white font-semibold py-2 rounded-lg transition delay-150 duration-300 ease-in-out">
+                        class="w-full bg-sky-400 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition delay-150 duration-300 ease-in-out">
                         Daftar Sekarang
                     </button>
                 </div>

@@ -66,6 +66,14 @@ class RiwayatController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // $trx = Transaction::findOrFail($id);
+
+        // $trx->items()->delete();
+
+        // $trx->delete();
+
+        // return response()->json([
+        //     'success' => true
+        // ]);
     }
 }

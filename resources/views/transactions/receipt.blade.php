@@ -31,7 +31,7 @@
 
     <!-- Receipt Card -->
     <div class="receipt-container w-full max-w-md bg-white p-8 rounded-tr-3xl rounded-bl-3xl rounded-tl-md rounded-br-md shadow-xl border border-slate-100 relative overflow-hidden">
-        
+
         <!-- Decorative Header -->
         <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-400 via-indigo-500 to-sky-400"></div>
 
@@ -95,7 +95,7 @@
             <i class="fa-solid fa-qrcode text-4xl text-slate-300 mb-2"></i>
             <p class="text-xs text-slate-500 font-medium">Terima kasih atas pembelian Anda!</p>
         </div>
-        
+
     </div>
 
 </body>

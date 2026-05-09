@@ -8,8 +8,8 @@
         <h2 class="text-lg font-bold text-gray-800">Riwayat Pembelian</h2>
         <p class="text-xs text-gray-400 mt-0.5">Semua transaksi pembelian kamu</p>
     </div>
-    <div class="flex items-center gap-2 bg-sky-50 border border-sky-100 rounded-xl px-4 py-2.5">
-        <i class="fa-solid fa-receipt text-sky-400 text-sm"></i>
+    <div class="flex items-center gap-2 bg-sky-50 border border-sky-100 rounded-xl px-4 py-3">
+        {{-- <i class="fa-solid fa-receipt text-sky-400 text-sm"></i> --}}
         <div>
             <p class="text-xs text-gray-400">Total Pembelian</p>
             <p class="text-sm font-bold text-sky-500">
@@ -34,7 +34,7 @@
 @else
     <div class="space-y-4">
         @foreach($riwayat as $trx)
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div id="trx-{{ $trx->id }}" class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition">
 
                 {{-- HEADER TRANSAKSI --}}
                 <div class="flex items-center justify-between px-5 py-4 border-b border-gray-50">
@@ -106,10 +106,39 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         @endforeach
     </div>
 @endif
 
 @endsection
+{{-- <script>
+function hapusTransaksi(id, el) {
+    if (!confirm('Yakin mau hapus transaksi ini?')) return;
+
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/riwayat/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': token
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+
+            const card = document.getElementById(`trx-${id}`);
+            card.style.transition = '0.3s';
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(50px)';
+
+            setTimeout(() => {
+                card.remove();
+            }, 300);
+
+        }
+    })
+    .catch(() => alert('Gagal hapus data'));
+}
+</script> --}}

@@ -72,7 +72,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/{id}', [LaporanController::class, 'detail'])->name('laporan.detail');
     Route::get('/laporan/{id}/print', [LaporanController::class, 'print'])->name('laporan.print');
-    
+
     Route::get('/topup', [TopupController::class, 'index'])->name('admin.topup.index');
     Route::post('/topup', [TopupController::class, 'store'])->name('admin.topup.store');
     
@@ -92,6 +92,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
             Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
             Route::get('/transactions/{transaction}/receipt', [TransactionController::class, 'receipt'])->name('transactions.receipt');
             Route::resource('riwayat', RiwayatController::class);
+            Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
