@@ -45,7 +45,7 @@
             <div class="h-16 flex items-center justify-between px-6 border-b">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-store text-blue-500 text-lg"></i>
-                    <h2 class="font-bold text-gray-800 text-lg">KOPERASIKU</h2>
+                    <h2 class="font-bold text-gray-800 text-lg">KOPERASIKU</h2>     
                 </div>
                 <button onclick="closeSidebar()" class="md:hidden text-gray-400 hover:text-gray-600 text-xl">
                     <i class="fa-solid fa-xmark"></i>
