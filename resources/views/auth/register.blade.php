@@ -1,81 +1,150 @@
 <x-guest-layout>
-            <div class="text-center mb-6">
-                <h2 class="text-3xl font-bold">
-                    🏪 KOPERASIKU
-                </h2>
-                <p class="text-gray-500 text-sm mt-2">
-                    Buat Akun Baru
-                </p>
+
+    <div class="auth-form-title">Buat Akun Baru</div>
+    <div class="auth-form-sub">Isi data di bawah untuk mendaftar sebagai siswa koperasi.</div>
+
+    @if ($errors->any())
+        <div style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:0.75rem 1rem;font-size:0.8125rem;margin-bottom:1rem;">
+            <i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>
+            {{ $errors->first() }}
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+
+        {{-- Nama Lengkap --}}
+        <div class="field-group">
+            <label class="field-label" for="name">Nama Lengkap</label>
+            <div class="field-wrap">
+                <i class="fa-solid fa-user field-icon"></i>
+                <input
+                    id="name"
+                    class="field-input"
+                    type="text"
+                    name="name"
+                    value="{{ old('name') }}"
+                    required
+                    autofocus
+                    placeholder="Nama lengkap Anda"
+                >
             </div>
+            @error('name')
+                <span class="field-error">{{ $message }}</span>
+            @enderror
+        </div>
 
-            <form method="POST" action="{{ route('register') }}">
-                @csrf
+        {{-- NISN --}}
+        <div class="field-group">
+            <label class="field-label" for="nisn">
+                NISN
+                <span style="font-weight:400;color:#94a3b8;font-size:0.75rem;"></span>
+            </label>
+            <div class="field-wrap">
+                <i class="fa-solid fa-id-card field-icon"></i>
+                <input
+                    id="nisn"
+                    class="field-input"
+                    type="text"
+                    name="nisn"
+                    value="{{ old('nisn') }}"
+                    placeholder="Nomor Induk Siswa Nasional"
+                >
+            </div>
+            @error('nisn')
+                <span class="field-error">{{ $message }}</span>
+            @enderror
+        </div>
 
-                <div>
-                    <x-input-label for="name" :value="'Nama Lengkap'" />
-                    <x-text-input id="name"
-                        class="block mt-1 w-full rounded-lg"
-                        type="text"
-                        name="name"
-                        :value="old('name')"
-                        required
-                        autofocus />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
+        {{-- Email --}}
+        <div class="field-group">
+            <label class="field-label" for="email">Email</label>
+            <div class="field-wrap">
+                <i class="fa-solid fa-envelope field-icon"></i>
+                <input
+                    id="email"
+                    class="field-input"
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    required
+                    placeholder="email@sekolah.com"
+                >
+            </div>
+            @error('email')
+                <span class="field-error">{{ $message }}</span>
+            @enderror
+        </div>
 
-                <div class="mt-4">
-                    <x-input-label for="nisn" :value="'NISN (Nomor Induk Siswa Nasional)'" />
-                    <x-text-input id="nisn"
-                        class="block mt-1 w-full rounded-lg"
-                        type="text"
-                        name="nisn"
-                        :value="old('nisn')" />
-                    <x-input-error :messages="$errors->get('nisn')" class="mt-2" />
+        {{-- Password --}}
+        <div class="field-group">
+            <label class="field-label" for="password">Password</label>
+            <div class="field-wrap">
+                <i class="fa-solid fa-lock field-icon"></i>
+                <input
+                    id="password"
+                    class="field-input field-input-right"
+                    type="password"
+                    name="password"
+                    required
+                    placeholder="Min. 8 karakter"
+                >
+                <span class="field-icon-right" onclick="togglePwd('password','eyePass')">
+                    <i class="fa-solid fa-eye-slash" id="eyePass"></i>
+                </span>
+            </div>
+            @error('password')
+                <span class="field-error">{{ $message }}</span>
+            @enderror
+        </div>
 
-                </div>
+        {{-- Konfirmasi Password --}}
+        <div class="field-group">
+            <label class="field-label" for="password_confirmation">Konfirmasi Password</label>
+            <div class="field-wrap">
+                <i class="fa-solid fa-lock field-icon"></i>
+                <input
+                    id="password_confirmation"
+                    class="field-input field-input-right"
+                    type="password"
+                    name="password_confirmation"
+                    required
+                    placeholder="Ulangi password Anda"
+                >
+                <span class="field-icon-right" onclick="togglePwd('password_confirmation','eyeConfirm')">
+                    <i class="fa-solid fa-eye-slash" id="eyeConfirm"></i>
+                </span>
+            </div>
+            @error('password_confirmation')
+                <span class="field-error">{{ $message }}</span>
+            @enderror
+        </div>
 
-                <div class="mt-4">
-                    <x-input-label for="email" :value="'Email'" />
-                    <x-text-input id="email"
-                        class="block mt-1 w-full rounded-lg"
-                        type="email"
-                        name="email"
-                        :value="old('email')"
-                        required />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                </div>
+        {{-- Submit --}}
+        <button type="submit" class="btn-auth">
+            <i class="fa-solid fa-user-plus" style="margin-right:8px;"></i>
+            Daftar Sekarang
+        </button>
+    </form>
 
-                <div class="mt-4">
-                    <x-input-label for="password" :value="'Password'" />
-                    <x-text-input id="password"
-                        class="block mt-1 w-full rounded-lg"
-                        type="password"
-                        name="password"
-                        required />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
+    <div class="auth-divider">atau</div>
 
-                <div class="mt-4">
-                    <x-input-label for="password_confirmation" :value="'Konfirmasi Password'" />
-                    <x-text-input id="password_confirmation"
-                        class="block mt-1 w-full rounded-lg"
-                        type="password"
-                        name="password_confirmation"
-                        required />
-                </div>
+    <div class="auth-footer-link">
+        Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a>
+    </div>
 
-                <div class="mt-6">
-                    <button type="submit"
-                        class="w-full bg-sky-400 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition delay-150 duration-300 ease-in-out">
-                        Daftar Sekarang
-                    </button>
-                </div>
+    <script>
+        function togglePwd(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon  = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        }
+    </script>
 
-                <div class="mt-4 text-center">
-                    <a href="{{ route('login') }}"
-                        class="text-sm text-gray-600 hover:text-blue-600">
-                        Sudah punya akun? Masuk
-                    </a>
-                </div>
-            </form>
 </x-guest-layout>
