@@ -51,8 +51,11 @@
     <div class="blob bg-pink-200 w-80 h-80 rounded-full top-[20%] right-[10%] mix-blend-multiply delay-150"></div>
     <nav class="absolute w-full top-0 z-50 px-6 py-6 lg:px-12 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center rounded-xl shadow-lg shadow-sky-500/30 text-white">
-                <i class="fa-solid fa-store text-lg"></i>
+            <div class="w-11 h-11 rounded-2xl bg-sky-500 text-white flex items-center justify-center shadow-lg shadow-sky-500/20">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" fill="white" opacity="0.9"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
             </div>
             <span class="text-xl font-bold outfit tracking-tight text-slate-800">Koperasi<span class="text-sky-600">KU</span></span>
         </div>
@@ -326,7 +329,10 @@
             <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 rounded-2xl bg-sky-500 text-white flex items-center justify-center shadow-lg shadow-sky-500/20">
-                        <i class="fa-solid fa-store"></i>
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" fill="white" opacity="0.9"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
                     </div>
                     <div>
                         <p class="font-semibold text-slate-900 text-lg">KoperasiKU</p>

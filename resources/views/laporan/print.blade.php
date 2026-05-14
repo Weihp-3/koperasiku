@@ -141,7 +141,7 @@
     <div>
         <div class="receipt">
             <div class="receipt-header">
-                <div class="brand">🏪 KOPERASIKU</div>
+                <div class="brand"> KOPERASIKU</div>
                 <div class="subtitle">KOPERASI SEKOLAH</div>
                 <div class="trx-id">TRX #{{ str_pad($transaction->id, 5, '0', STR_PAD_LEFT) }}</div>
             </div>
@@ -201,7 +201,7 @@
                 style="background: linear-gradient(135deg, #0ea5e9, #2563eb); color: white; border: none;
                        padding: 10px 28px; border-radius: 12px; font-family: 'Poppins', sans-serif;
                        font-size: 14px; font-weight: 600; cursor: pointer;">
-                🖨️ Cetak Struk
+                 Cetak Struk
             </button>
             <button onclick="window.close()"
                 style="background: #f3f4f6; color: #6b7280; border: none; margin-left: 10px;

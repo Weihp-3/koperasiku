@@ -44,9 +44,17 @@
         <aside id="sidebar" class="w-64 bg-white border-r hidden md:flex flex-col flex-shrink-0">
             <div class="h-16 flex items-center justify-between px-6 border-b">
                 <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-store text-blue-500 text-lg"></i>
-                    <h2 class="font-bold text-gray-800 text-lg">KOPERASIKU</h2>     
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#0EA5E9" opacity="0.9"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"
+                            stroke="#0EA5E9"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            fill="none"/>
+                    </svg>
                 </div>
+                <h2 class="font-bold text-gray-800 text-lg">KOPERASIKU</h2>
                 <button onclick="closeSidebar()" class="md:hidden text-gray-400 hover:text-gray-600 text-xl">
                     <i class="fa-solid fa-xmark"></i>
                 </button>

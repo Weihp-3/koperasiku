@@ -8,12 +8,12 @@
         <h2 class="text-lg font-bold text-gray-800">Daftar Siswa</h2>
         <p class="text-xs text-gray-400 mt-0.5">Kelola semua data siswa dan akun</p>
     </div>
-    <a href="{{ route('admin.siswa.create') }}"
+    {{-- <a href="{{ route('admin.siswa.create') }}"
         class="bg-sky-400 hover:bg-sky-500 active:scale-95 text-white px-5 py-2.5
         rounded-xl text-sm font-medium flex items-center gap-2 transition
         w-full sm:w-auto justify-center shadow-sm">
         <i class="fa-solid fa-plus text-xs"></i> Tambah Siswa
-    </a>
+    </a> --}}
 </div>
 
 @if(session('success'))
