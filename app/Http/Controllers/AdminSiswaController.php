@@ -66,16 +66,20 @@ class AdminSiswaController extends Controller
     {
         $siswa = User::where('role', 'siswa')->findOrFail($id);
 
+        if ($siswa->google_id) {
+            return redirect()->route('admin.siswa.index')->with('error', 'Data siswa yang mendaftar melalui Google tidak dapat diubah.');
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class.',email,'.$siswa->id],
-            'nisn' => ['nullable', 'string', 'max:20', 'unique:'.User::class.',nisn,'.$siswa->id],
+            // 'nisn' => ['nullable', 'string', 'max:20', 'unique:'.User::class.',nisn,'.$siswa->id],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $siswa->name = $request->name;
         $siswa->email = $request->email;
-        $siswa->nisn = $request->nisn;
+        // $siswa->nisn = $request->nisn;
         
         if ($request->filled('password')) {
             $siswa->password = Hash::make($request->password);

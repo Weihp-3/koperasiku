@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
+        <!-- <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
                 <i class="fa-solid fa-user text-emerald-500 text-xl"></i>
             </div>
@@ -55,7 +55,7 @@
                 <p class="text-sm text-gray-500 font-medium">NISN</p>
                 <p class="text-lg font-bold text-gray-800">{{ Auth::user()->nisn ?? '-' }}</p>
             </div>
-        </div>
+        </div> -->
 
         <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center flex-shrink-0">

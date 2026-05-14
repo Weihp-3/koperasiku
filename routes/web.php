@@ -37,14 +37,15 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         $range = request('range', '7');
         $totalProduk = Product::count();
         $stokMenipis = Product::where('stock','<',5)->count();
-        $penjualanHariIni = Transaction::whereDate('created_at', now())->sum('total_price');
-        $penjualanBulanIni = Transaction::whereMonth('created_at', now()->month)->sum('total_price');
+        $penjualanHariIni = Transaction::whereDate('created_at', now())->where('status', 'selesai')->sum('total_price');
+        $penjualanBulanIni = Transaction::whereMonth('created_at', now()->month)->where('status', 'selesai')->sum('total_price');
         $produkMenipis = Product::where('stock','<',5)->take(5)->get();
 
         $chart = Transaction::select(
                 DB::raw('DATE(created_at) as tanggal'),
                 DB::raw('SUM(total_price) as total')
             )
+            ->where('status', 'selesai')
             ->where('created_at', '>=', now()->subDays(6))
             ->groupBy('tanggal')
             ->orderBy('tanggal')
@@ -76,6 +77,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/topup', [TopupController::class, 'index'])->name('admin.topup.index');
     Route::post('/topup', [TopupController::class, 'store'])->name('admin.topup.store');
     
+    Route::get('/transactions/pending', [TransactionController::class, 'pending'])->name('admin.transactions.pending');
+    Route::patch('/transactions/{id}/verify', [TransactionController::class, 'verify'])->name('admin.transactions.verify');
+    Route::patch('/transactions/{id}/reject', [TransactionController::class, 'reject'])->name('admin.transactions.reject');
+
     Route::resource('siswa', AdminSiswaController::class)->names('admin.siswa')->except(['show']);
     });
 

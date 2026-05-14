@@ -34,27 +34,6 @@
             @enderror
         </div>
 
-        {{-- NISN --}}
-        <div class="field-group">
-            <label class="field-label" for="nisn">
-                NISN
-                <span style="font-weight:400;color:#94a3b8;font-size:0.75rem;"></span>
-            </label>
-            <div class="field-wrap">
-                <i class="fa-solid fa-id-card field-icon"></i>
-                <input
-                    id="nisn"
-                    class="field-input"
-                    type="text"
-                    name="nisn"
-                    value="{{ old('nisn') }}"
-                    placeholder="Nomor Induk Siswa Nasional"
-                >
-            </div>
-            @error('nisn')
-                <span class="field-error">{{ $message }}</span>
-            @enderror
-        </div>
 
         {{-- Email --}}
         <div class="field-group">
@@ -128,6 +107,11 @@
     </form>
 
     <div class="auth-divider">atau</div>
+
+    <a href="{{ route('auth.google') }}" class="btn-auth" style="background:#fff;color:#333;border:1px solid #e5e7eb;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:500;transition:all 0.3s;box-shadow:0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='#fff'">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width:20px;margin-right:10px;">
+        Daftar dengan Google
+    </a>
 
     <div class="auth-footer-link">
         Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a>

@@ -37,27 +37,27 @@
                     <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1.5">
                         Nama Lengkap <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" name="name" value="{{ old('name', $siswa->name) }}" placeholder="Masukkan nama lengkap" required
+                    <input type="text" name="name" value="{{ old('name', $siswa->name) }}" placeholder="Masukkan nama lengkap" required {{ $siswa->google_id ? 'disabled' : '' }}
                         class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm
-                        focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition">
+                        focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition {{ $siswa->google_id ? 'bg-gray-100 cursor-not-allowed' : '' }}">
                 </div>
 
-                <div>
+                <!-- <div>
                     <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1.5">
                         NISN
                     </label>
                     <input type="text" name="nisn" value="{{ old('nisn', $siswa->nisn) }}" placeholder="Masukkan NISN siswa"
                         class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm
                         focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition">
-                </div>
+                </div> -->
 
                 <div>
                     <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1.5">
                         Email <span class="text-red-500">*</span>
                     </label>
-                    <input type="email" name="email" value="{{ old('email', $siswa->email) }}" placeholder="siswa@example.com" required
+                    <input type="email" name="email" value="{{ old('email', $siswa->email) }}" placeholder="siswa@example.com" required {{ $siswa->google_id ? 'disabled' : '' }}
                         class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm
-                        focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition">
+                        focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition {{ $siswa->google_id ? 'bg-gray-100 cursor-not-allowed' : '' }}">
                 </div>
 
                 <div class="p-4 bg-yellow-50/50 border border-yellow-100 rounded-xl mt-6">
@@ -67,17 +67,17 @@
                             <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1.5">
                                 Password Baru
                             </label>
-                            <input type="password" name="password" placeholder="Minimal 8 karakter"
+                            <input type="password" name="password" placeholder="Minimal 8 karakter" {{ $siswa->google_id ? 'disabled' : '' }}
                                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm
-                                focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition">
+                                focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition {{ $siswa->google_id ? 'bg-gray-100 cursor-not-allowed' : '' }}">
                         </div>
                         <div>
                             <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1.5">
                                 Konfirmasi Password Baru
                             </label>
-                            <input type="password" name="password_confirmation" placeholder="Ulangi password baru"
+                            <input type="password" name="password_confirmation" placeholder="Ulangi password baru" {{ $siswa->google_id ? 'disabled' : '' }}
                                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm
-                                focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition">
+                                focus:outline-none focus:ring-2 focus:ring-sky-400 hover:border-sky-300 transition {{ $siswa->google_id ? 'bg-gray-100 cursor-not-allowed' : '' }}">
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                 </a>
                 <button type="submit"
                     class="bg-sky-400 hover:bg-sky-500 active:scale-95 text-white px-6 py-2.5
-                    rounded-xl text-sm font-medium transition shadow-sm">
+                    rounded-xl text-sm font-medium transition shadow-sm {{ $siswa->google_id ? 'opacity-50 cursor-not-allowed pointer-events-none' : '' }}" {{ $siswa->google_id ? 'disabled' : '' }}>
                     Simpan Perubahan
                 </button>
             </div>

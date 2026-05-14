@@ -75,6 +75,14 @@
         </div>
 
         <div class="border-t px-4 py-4 bg-slate-50 rounded-b-xl">
+            <div class="mb-3">
+                <label class="text-xs text-gray-600 font-semibold block mb-1">Metode Pembayaran</label>
+                <select id="paymentMethod" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" onchange="renderKeranjang()">
+                    <option value="saldo">Saldo Koperasi</option>
+                    <option value="qris">QRIS</option>
+                    <option value="cash">Tunai / Cash</option>
+                </select>
+            </div>
             <div class="flex justify-between items-center mb-3">
                 <span class="text-sm text-gray-600 font-semibold">Total Diminta</span>
                 <span class="text-lg font-bold text-gray-800" id="totalHarga">Rp 0</span>
@@ -120,11 +128,18 @@
             </div>
             <div id="stateSukses" class="hidden">
                 <div class="flex flex-col items-center pb-2">
-                    <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4 animate-bounce">
-                        <i class="fa-solid fa-check text-emerald-500 text-3xl"></i>
+                    <div id="successIconWrapper" class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4 animate-bounce">
+                        <i id="successIcon" class="fa-solid fa-check text-emerald-500 text-3xl"></i>
                     </div>
-                    <h2 class="text-xl font-bold text-slate-800">Pembelian Berhasil!</h2>
-                    <p class="text-sm text-slate-500 mt-1">Saldo Anda telah dipotong</p>
+                    <h2 id="successTitle" class="text-xl font-bold text-slate-800">Pembelian Berhasil!</h2>
+                    <p id="successDesc" class="text-sm text-slate-500 mt-1">Saldo Anda telah dipotong</p>
+                </div>
+
+                <div id="qrisContainer" class="hidden flex-col items-center mt-4">
+                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200">
+                        <!-- Anda dapat mengganti src ini dengan QRIS dinamis/hasil generate nantinya -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/QR_Code_Example.svg/250px-QR_Code_Example.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="QRIS" class="w-40 h-40 object-contain">
+                    </div>
                 </div>
 
                 <div class="bg-slate-50 rounded-xl p-4 my-4 text-center border border-slate-100">
@@ -193,15 +208,17 @@
         currentTotal = keranjang.reduce((sum, i) => sum + i.harga * i.qty, 0);
         document.getElementById('totalHarga').textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
 
+        const paymentMethod = document.getElementById('paymentMethod').value;
         const btnBayar = document.getElementById('btnBayar');
-        if(currentTotal > userBalance) {
+        if(paymentMethod === 'saldo' && currentTotal > userBalance) {
             btnBayar.classList.remove('bg-sky-500', 'hover:bg-sky-600');
             btnBayar.classList.add('bg-red-500', 'hover:bg-red-600');
             btnBayar.innerHTML = 'Saldo Tidak Cukup <i class="fa-solid fa-triangle-exclamation"></i>';
         } else {
             btnBayar.classList.add('bg-sky-500', 'hover:bg-sky-600');
             btnBayar.classList.remove('bg-red-500', 'hover:bg-red-600');
-            btnBayar.innerHTML = 'Bayar dengan Saldo <i class="fa-solid fa-arrow-right"></i>';
+            let txt = paymentMethod === 'qris' ? 'Bayar dengan QRIS' : (paymentMethod === 'cash' ? 'Bayar Tunai' : 'Bayar dengan Saldo');
+            btnBayar.innerHTML = txt + ' <i class="fa-solid fa-arrow-right"></i>';
         }
 
         if (keranjang.length === 0) {
@@ -244,14 +261,15 @@
             alert('Pilih pesanan terlebih dahulu!');
             return;
         }
-        if (currentTotal > userBalance) {
+        const paymentMethod = document.getElementById('paymentMethod').value;
+        if (paymentMethod === 'saldo' && currentTotal > userBalance) {
             alert('Saldo Anda tidak cukup! Harap isi saldo terlebih dahulu.');
             return;
         }
 
         document.getElementById('modalTotal').textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
         document.getElementById('totalSuksesInfo').textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
-        document.getElementById('sisaSaldo').textContent = 'Rp ' + (userBalance - currentTotal).toLocaleString('id-ID');
+        document.getElementById('sisaSaldo').textContent = paymentMethod === 'saldo' ? 'Rp ' + (userBalance - currentTotal).toLocaleString('id-ID') : '-';
 
         document.getElementById('stateKonfirmasi').classList.remove('hidden');
         document.getElementById('stateSukses').classList.add('hidden');
@@ -281,19 +299,47 @@
         btn.disabled = true;
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
 
+        const paymentMethod = document.getElementById('paymentMethod').value;
         fetch('{{ route('transactions.store') }}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({ items, total_price: currentTotal })
+            body: JSON.stringify({ items, total_price: currentTotal, payment_method: paymentMethod })
         })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
                 // Sembunyikan konfirmasi, arahkan ke tab sukses
                 document.getElementById('stateKonfirmasi').classList.add('hidden');
+                
+                const successTitle = document.getElementById('successTitle');
+                const successDesc = document.getElementById('successDesc');
+                const successIconWrapper = document.getElementById('successIconWrapper');
+                const successIcon = document.getElementById('successIcon');
+                const qrisContainer = document.getElementById('qrisContainer');
+
+                if (paymentMethod === 'saldo') {
+                    successTitle.textContent = 'Pembelian Berhasil!';
+                    successDesc.textContent = 'Saldo Anda telah dipotong';
+                    successIconWrapper.className = 'w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4 animate-bounce';
+                    successIcon.className = 'fa-solid fa-check text-emerald-500 text-3xl';
+                    qrisContainer.classList.replace('flex', 'hidden');
+                } else if (paymentMethod === 'qris') {
+                    successTitle.textContent = 'Menunggu Pembayaran!';
+                    successDesc.textContent = 'Silakan scan QRIS di bawah ini untuk membayar';
+                    successIconWrapper.className = 'w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4 animate-pulse';
+                    successIcon.className = 'fa-solid fa-qrcode text-blue-500 text-3xl';
+                    qrisContainer.classList.replace('hidden', 'flex');
+                } else {
+                    successTitle.textContent = 'Menunggu Pembayaran!';
+                    successDesc.textContent = 'Silakan berikan uang tunai ke Kasir';
+                    successIconWrapper.className = 'w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mb-4 animate-pulse';
+                    successIcon.className = 'fa-solid fa-money-bill-wave text-orange-500 text-3xl';
+                    qrisContainer.classList.replace('flex', 'hidden');
+                }
+
                 document.getElementById('stateSukses').classList.remove('hidden');
                 keranjang = [];
             } else {

@@ -9,6 +9,8 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'total_price',
+        'payment_method',
+        'status',
     ];
     public function user()
     {

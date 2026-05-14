@@ -33,7 +33,6 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'nisn' => ['nullable', 'string', 'max:10', 'unique:'.User::class], // Menambahkan validasi untuk NISN, jika diperlukan
         ]);
 
         $user = User::create([
@@ -41,7 +40,6 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'siswa', // Menetapkan peran default sebagai "siswa"
-            'nisn' => $request->nisn, // Menyimpan NISN ke database
             'balance' => 0, // saldo awal
         ]);
 

@@ -23,6 +23,7 @@ class User extends Authenticatable
         // 'role', 
         'nisn',
         // 'balance',
+        'google_id',
     ];
 
     /**

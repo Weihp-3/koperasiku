@@ -80,6 +80,11 @@
 
     <div class="auth-divider">atau</div>
 
+    <a href="{{ route('auth.google') }}" class="btn-auth" style="background:#fff;color:#333;border:1px solid #e5e7eb;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:500;transition:all 0.3s;box-shadow:0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='#fff'">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width:20px;margin-right:10px;">
+        Masuk dengan Google
+    </a>
+
     <div class="auth-footer-link">
         Belum punya akun? <a href="{{ route('register') }}">Daftar sekarang</a>
     </div>
