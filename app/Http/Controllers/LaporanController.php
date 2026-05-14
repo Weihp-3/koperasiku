@@ -25,7 +25,8 @@ class LaporanController extends Controller
 
         // Ambil transaksi dengan filter tanggal
         $query = Transaction::with(['user', 'items.product'])
-            ->whereBetween('created_at', [$start, $end]);
+            ->whereBetween('created_at', [$start, $end])
+            ->where('status', 'selesai');
 
         if ($search) {
             $query->whereHas('user', function ($q) use ($search) {
@@ -36,14 +37,14 @@ class LaporanController extends Controller
         $transactions = $query->latest()->paginate(15)->withQueryString();
 
         // Ringkasan statistik
-        $totalPendapatan = Transaction::whereBetween('created_at', [$start, $end])->sum('total_price');
-        $totalTransaksi  = Transaction::whereBetween('created_at', [$start, $end])->count();
+        $totalPendapatan = Transaction::whereBetween('created_at', [$start, $end])->where('status', 'selesai')->sum('total_price');
+        $totalTransaksi  = Transaction::whereBetween('created_at', [$start, $end])->where('status', 'selesai')->count();
         $rataRata        = $totalTransaksi > 0 ? round($totalPendapatan / $totalTransaksi) : 0;
 
         // Produk terlaris di periode ini
         $produkTerlaris = TransactionItem::select('product_id', DB::raw('SUM(qty) as total_qty'), DB::raw('SUM(subtotal) as total_revenue'))
             ->whereHas('transaction', function ($q) use ($start, $end) {
-                $q->whereBetween('created_at', [$start, $end]);
+                $q->whereBetween('created_at', [$start, $end])->where('status', 'selesai');
             })
             ->with('product')
             ->groupBy('product_id')
@@ -58,6 +59,7 @@ class LaporanController extends Controller
                 DB::raw('COUNT(*) as jumlah')
             )
             ->whereBetween('created_at', [$start, $end])
+            ->where('status', 'selesai')
             ->groupBy('tanggal')
             ->orderBy('tanggal')
             ->get();

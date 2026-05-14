@@ -37,17 +37,20 @@ class TransactionController extends Controller
         $request->validate([
             'items'        => 'required|array',
             'items.*.id'   => 'required|exists:products,id',
-            'items.*.qty'  => 'required|integer|min:1',
-            'total_price'  => 'required|numeric',
+            'items.*.qty'    => 'required|integer|min:1',
+            'total_price'    => 'required|numeric',
+            'payment_method' => 'required|in:saldo,qris,cash',
         ]);
 
         try {
             DB::beginTransaction();
 
             $user = User::findOrFail(Auth::id());
+            $paymentMethod = $request->payment_method ?? 'saldo';
+            $status = $paymentMethod === 'saldo' ? 'selesai' : 'pending';
 
-            // Jika user adalah siswa, cek dan potong saldo
-            if ($user->role === 'siswa') {
+            // Jika user adalah siswa dan bayar pakai saldo, cek dan potong saldo
+            if ($user->role === 'siswa' && $paymentMethod === 'saldo') {
                 if ($user->balance < $request->total_price) {
                     return response()->json([
                         'success' => false,
@@ -69,8 +72,10 @@ class TransactionController extends Controller
 
             // Buat transaksi SEKALI di luar loop
             $transaction = Transaction::create([
-                'user_id'     => $user->id,
-                'total_price' => $request->total_price,
+                'user_id'        => $user->id,
+                'total_price'    => $request->total_price,
+                'payment_method' => $paymentMethod,
+                'status'         => $status,
             ]);
 
             // Simpan item & kurangi stok
@@ -88,8 +93,8 @@ class TransactionController extends Controller
                 $product->decrement('stock', $item['qty']);
             }
 
-            // Potong balance jika role siswa
-            if ($user->role === 'siswa') {
+            // Potong balance jika role siswa dan metode pembayaran saldo
+            if ($user->role === 'siswa' && $paymentMethod === 'saldo') {
                 $user->balance -= $request->total_price;
                 $user->save();
             }
@@ -116,6 +121,48 @@ class TransactionController extends Controller
                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Display pending transactions for admin.
+     */
+    public function pending()
+    {
+        $transactions = Transaction::with(['user', 'items.product'])
+            ->where('status', 'pending')
+            ->latest()
+            ->get();
+            
+        return view('admin.transactions.pending', compact('transactions'));
+    }
+
+    /**
+     * Verify a pending transaction.
+     */
+    public function verify($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update(['status' => 'selesai']);
+        return redirect()->back()->with('success', 'Transaksi berhasil diverifikasi.');
+    }
+
+    /**
+     * Reject a pending transaction and restore stock.
+     */
+    public function reject($id)
+    {
+        $transaction = Transaction::with('items.product')->findOrFail($id);
+        
+        $transaction->update(['status' => 'batal']);
+        
+        // Kembalikan stok
+        foreach ($transaction->items as $item) {
+            if ($item->product) {
+                $item->product->increment('stock', $item->qty);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Transaksi pembayaran berhasil ditolak dan stok dikembalikan.');
     }
 
     /**

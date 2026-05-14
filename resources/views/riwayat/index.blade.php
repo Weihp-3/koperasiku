@@ -56,10 +56,17 @@
                         <p class="text-sm font-bold text-sky-500">
                             Rp {{ number_format($trx->total_price, 0, ',', '.') }}
                         </p>
-                        <span class="inline-flex items-center gap-1 bg-green-50 text-green-600
-                            text-xs font-medium px-2.5 py-0.5 rounded-full mt-1">
-                            <i class="fa-solid fa-circle-check text-xs"></i> Selesai
-                        </span>
+                        @if($trx->status === 'selesai')
+                            <span class="inline-flex items-center gap-1 bg-green-50 text-green-600
+                                text-xs font-medium px-2.5 py-0.5 rounded-full mt-1">
+                                <i class="fa-solid fa-circle-check text-xs"></i> Selesai
+                            </span>
+                        @elseif($trx->status === 'pending')
+                            <span class="inline-flex items-center gap-1 bg-yellow-50 text-yellow-600
+                                text-xs font-medium px-2.5 py-0.5 rounded-full mt-1">
+                                <i class="fa-solid fa-clock text-xs"></i> Menunggu
+                            </span>
+                        @endif
                     </div>
                 </div>
 

@@ -123,6 +123,14 @@
                         </svg>
                         Top Up Siswa
                     </a>
+                    <a href="{{ route('admin.transactions.pending') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm
+                        transition-all duration-200 transform hover:translate-x-1 active:scale-95
+                        hover:shadow-[0_6px_12px_rgba(27,168,240,0.4)]
+                        {{ request()->routeIs('admin.transactions.pending') ? 'bg-sky-400 text-white shadow' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <i class="fa-solid fa-list-check w-4"></i>
+                        Verifikasi Bayar
+                    </a>
                 </div>
                 @endif
             </nav>
