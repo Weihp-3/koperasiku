@@ -20,12 +20,7 @@ class Product extends Model
 
     protected static function booted()
     {
-        static::saved(function ($product) {
-            \Illuminate\Support\Facades\Cache::flush();
-        });
-        static::deleted(function ($product) {
-            \Illuminate\Support\Facades\Cache::flush();
-        });
+        // Cache removed for real-time stock
     }
 
     public function items()

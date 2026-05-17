@@ -11,10 +11,7 @@ class KasirController extends Controller
      */
     public function index()
     {
-        $page = request()->get('page', 1);
-        $products = \Illuminate\Support\Facades\Cache::remember('kasir_products_page_' . $page, 60*60, function () {
-            return Product::where('stock', '>', 0)->paginate(12);
-        });
+        $products = Product::where('stock', '>', 0)->paginate(12);
         return view('kasir.index', compact('products'));
     }
 
