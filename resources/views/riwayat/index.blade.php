@@ -44,7 +44,7 @@
                         </div>
                         <div>
                             <p class="text-sm font-bold text-gray-800">
-                                Pembelian #{{ $trx->id }}
+                                Pembelian ke-{{ $riwayat->count() - $loop->index }}
                             </p>
                             <p class="text-xs text-gray-400">
                                 {{ $trx->created_at->format('d F Y') }} ·
@@ -65,6 +65,11 @@
                             <span class="inline-flex items-center gap-1 bg-yellow-50 text-yellow-600
                                 text-xs font-medium px-2.5 py-0.5 rounded-full mt-1">
                                 <i class="fa-solid fa-clock text-xs"></i> Menunggu
+                            </span>
+                        @elseif($trx->status === 'batal')
+                            <span class="inline-flex items-center gap-1 bg-red-50 text-red-600
+                                text-xs font-medium px-2.5 py-0.5 rounded-full mt-1">
+                                <i class="fa-solid fa-circle-xmark text-xs"></i> Ditolak
                             </span>
                         @endif
                     </div>

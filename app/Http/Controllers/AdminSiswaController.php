@@ -12,9 +12,19 @@ class AdminSiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswas = User::where('role', 'siswa')->latest()->get();
+        $query = User::where('role', 'siswa');
+        
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+        
+        $siswas = $query->latest()->get();
         return view('admin.siswa.index', compact('siswas'));
     }
 

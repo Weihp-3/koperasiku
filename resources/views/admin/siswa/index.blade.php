@@ -8,6 +8,17 @@
         <h2 class="text-lg font-bold text-gray-800">Daftar Siswa</h2>
         <p class="text-xs text-gray-400 mt-0.5">Kelola semua data siswa dan akun</p>
     </div>
+    <div class="relative flex-1 sm:max-w-xs">
+        <form method="GET" action="{{ route('admin.siswa.index') }}">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-300 text-xs"></i>
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Cari nama atau email..."
+                class="w-full border border-gray-200 rounded-xl pl-9 pr-4 py-2.5 text-sm hover:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400 transition">
+        </form>
+    </div>
 </div>
 
 @if(session('success'))
