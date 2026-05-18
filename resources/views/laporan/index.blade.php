@@ -183,8 +183,69 @@
         </div>
 
         @if($transactions->hasPages())
-        <div class="px-5 py-4 border-t border-gray-100">
-            {{ $transactions->links() }}
+        <div class="px-5 py-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+
+            {{-- Info halaman --}}
+            <p class="text-xs text-gray-400 order-2 sm:order-1">
+                Menampilkan
+                <span class="font-semibold text-gray-600">{{ $transactions->firstItem() }}</span>
+                –
+                <span class="font-semibold text-gray-600">{{ $transactions->lastItem() }}</span>
+                dari
+                <span class="font-semibold text-gray-600">{{ $transactions->total() }}</span>
+                transaksi
+            </p>
+
+            {{-- Tombol Pagination --}}
+            <div class="flex items-center gap-1 order-1 sm:order-2">
+
+                {{-- Tombol Previous --}}
+                @if($transactions->onFirstPage())
+                    <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 bg-gray-50 cursor-not-allowed select-none">
+                        <i class="fa-solid fa-chevron-left text-[10px]"></i> Sebelumnya
+                    </span>
+                @else
+                    <a href="{{ $transactions->previousPageUrl() }}"
+                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-600 bg-gray-100 hover:bg-sky-100 hover:text-sky-600 transition-all active:scale-95">
+                        <i class="fa-solid fa-chevron-left text-[10px]"></i> Sebelumnya
+                    </a>
+                @endif
+
+                {{-- Nomor Halaman --}}
+                @foreach($transactions->getUrlRange(1, $transactions->lastPage()) as $page => $url)
+                    @if($page == $transactions->currentPage())
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold bg-sky-500 text-white shadow-md shadow-sky-200">
+                            {{ $page }}
+                        </span>
+                    @elseif(
+                        $page == 1 ||
+                        $page == $transactions->lastPage() ||
+                        abs($page - $transactions->currentPage()) <= 1
+                    )
+                        <a href="{{ $url }}"
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-semibold text-gray-600 hover:bg-sky-100 hover:text-sky-600 transition-all active:scale-95">
+                            {{ $page }}
+                        </a>
+                    @elseif(
+                        $page == $transactions->currentPage() - 2 ||
+                        $page == $transactions->currentPage() + 2
+                    )
+                        <span class="inline-flex items-center justify-center w-8 h-8 text-xs text-gray-400">…</span>
+                    @endif
+                @endforeach
+
+                {{-- Tombol Next --}}
+                @if($transactions->hasMorePages())
+                    <a href="{{ $transactions->nextPageUrl() }}"
+                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-600 bg-gray-100 hover:bg-sky-100 hover:text-sky-600 transition-all active:scale-95">
+                        Selanjutnya <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                @else
+                    <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 bg-gray-50 cursor-not-allowed select-none">
+                        Selanjutnya <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </span>
+                @endif
+            </div>
         </div>
         @endif
     </div>
