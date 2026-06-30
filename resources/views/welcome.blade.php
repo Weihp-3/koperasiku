@@ -93,15 +93,15 @@
     <main class="flex-1 flex flex-col justify-center relative z-10 pt-20 lg:pt-0">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid lg:grid-cols-2 gap-12 items-center min-h-[85vh]">
             <div class="flex flex-col items-start pt-16 lg:pt-0">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold mb-6 shadow-sm">
+                {{-- <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold mb-6 shadow-sm">
                     <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                     </span>
                     Sistem POS Terbaru v2.0
-                </div>
+                </div> --}}
 
-                <h1 class="outfit text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-slate-900 mb-6 drop-shadow-sm">
+                <h1 class="outfit text-2xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-slate-900 mb-6 drop-shadow-sm">
                     Kelola Koperasi <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-600">Lebih Modern</span> & Mudah<span class="text-sky-500">.</span>
                 </h1>
@@ -250,7 +250,7 @@
             <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
                 <div class="space-y-6">
                     <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-300">Tentang Sistem</p>
-                    <h2 class="text-4xl lg:text-5xl font-extrabold">Sistem koperasi sekolah yang mudah dipelajari dan dikelola.</h2>
+                    <h2 class="text-2xl lg:text-5xl font-extrabold">Sistem koperasi sekolah yang mudah dipelajari dan dikelola.</h2>
                     <p class="text-slate-300 max-w-xl leading-relaxed text-lg">KoperasiKU dibuat untuk membantu kepala sekolah, kasir, dan siswa mengelola penjualan, dan laporan dengan workflow sederhana, tanpa perlu pengetahuan teknis rumit.</p>
                 </div>
 
